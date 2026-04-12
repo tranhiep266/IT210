@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title layout:title-pattern="$CONTENT_TITLE - Nhà hàng Tranhiep">
+        Nhà hàng Tranhiep
+    </title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #ff7f50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+            min-height: 400px;
+            background-color: white;
+        }
+
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+    <th:block layout:fragment="css"></th:block>
+
+</head>
+
+<body>
+
+
+<header>
+    <h1> Nhà hàng Tranhiep</h1>
+    <p>Chào mừng bạn đến với hệ thống quản lý thực đơn</p>
+</header>
+
+
+<nav>
+    <a th:href="@{/}">Trang chủ</a>
+    <a th:href="@{/dish/list}">Danh sách món ăn</a>
+</nav>
+
+
+<main layout:fragment="content">
+    <h2>Nội dung đang được cập nhật...</h2>
+</main>
+
+
+<footer>
+    <p> Địa chỉ: Hà Nội</p>
+    <p> Hotline: 0123 456 789</p>
+    <p> 2026 Nhà hàng Tranhiep</p>
+</footer>
+
+
+<th:block layout:fragment="scripts"></th:block>
+
+</body>
+</html>

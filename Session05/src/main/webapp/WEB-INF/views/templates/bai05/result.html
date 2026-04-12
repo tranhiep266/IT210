@@ -1,0 +1,14 @@
+<div layout:fragment="content" xmlns:layout="http://www.w3.org/1999/xhtml">
+
+    <h2>Kết quả đơn hàng</h2>
+
+    <ul>
+        <li th:each="item : ${order.items}">
+            <span th:text="${item.dish.name}">Tên món</span> -
+            SL: <span th:text="${item.quantity}">1</span>
+        </li>
+    </ul>
+
+    <h3>Tổng tiền: <span th:text="${order.total}">0</span> VND</h3>
+
+</div>

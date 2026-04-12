@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main-layout}">
+
+<head>
+    <title>Đặt món nhanh</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h2>Đặt món nhanh</h2>
+    <form method="post" action="/bai05/order">
+        <div th:remove="all-but-first"
+             th:each="dish : ${dishes}">
+            <p>
+                <span th:text="${dish.name}">Phở bò</span> -
+                <span th:text="${dish.price}">40000</span> VND
+                <input type="number"
+                       name="qty_1"
+                       value="0"
+                       min="0"/>
+            </p>
+        </div>
+        <button type="submit">Đặt món</button>
+    </form>
+</div>
+</body>
+</html>
