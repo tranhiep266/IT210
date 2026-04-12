@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{main-layout :: head}">
+    <title>Chi tiết khóa học</title>
+</head>
+<body>
+<div th:replace="~{main-layout :: header}"></div>
+
+<main class="container main-content">
+    <div class="content-wrapper">
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/course/list}">Danh sách</a></li>
+                <li class="breadcrumb-item active">Chi tiết khóa học</li>
+            </ol>
+        </nav>
+
+        <div class="row g-4 align-items-center">
+            <div class="col-md-4 text-center border-end">
+                <div class="p-4 bg-light rounded-circle d-inline-block mb-3">
+                    <i class="bi bi-mortarboard text-primary" style="font-size: 4rem;"></i>
+                </div>
+                <h3 class="fw-bold" th:text="${course.name}"></h3>
+                <span class="badge bg-primary px-3 py-2" th:text="${course.instructor}"></span>
+            </div>
+            <div class="col-md-8 px-md-5">
+                <h5 class="text-primary fw-bold mb-4">Thông tin đầy đủ</h5>
+                <dl class="row">
+                    <dt class="col-sm-4 text-muted">Mã khóa học:</dt>
+                    <dd class="col-sm-8 fw-bold" th:text="${course.id}"></dd>
+
+                    <dt class="col-sm-4 text-muted">Mô tả:</dt>
+                    <dd class="col-sm-8" th:text="${course.description}"></dd>
+
+                    <dt class="col-sm-4 text-muted">Thời lượng:</dt>
+                    <dd class="col-sm-8"><i class="bi bi-clock me-2"></i><span th:text="${course.duration} + ' buổi'"></span></dd>
+
+                    <dt class="col-sm-4 text-muted">Hình thức:</dt>
+                    <dd class="col-sm-8">
+                            <span th:class="${course.isOnline} ? 'text-success' : 'text-primary'" class="fw-bold">
+                                <i th:class="${course.isOnline} ? 'bi bi-globe me-2' : 'bi bi-house me-2'"></i>
+                                <span th:text="${course.isOnline} ? 'Online' : 'Offline'"></span>
+                            </span>
+                    </dd>
+                </dl>
+                <div class="mt-4">
+                    <a th:href="@{/course/list}" class="btn btn-secondary">Quay lại</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div th:replace="~{main-layout :: footer}"></div>
+</body>
+</html>

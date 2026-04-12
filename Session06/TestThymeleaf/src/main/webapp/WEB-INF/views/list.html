@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{main-layout :: head}">
+    <title>Danh sách khóa học</title>
+</head>
+<body>
+<div th:replace="~{main-layout :: header}"></div>
+
+<main class="container main-content">
+    <div class="content-wrapper">
+        <h2 class="fw-bold text-dark mb-4 text-center">Quản lý Khóa học</h2>
+
+        <div th:if="${success}" class="alert alert-success alert-dismissible fade show border-0 shadow-sm mb-4">
+            <i class="bi bi-check-circle-fill me-2"></i> <span th:text="${success}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <div class="card border-0 bg-light rounded-4 mb-4">
+            <div class="card-body p-4">
+                <form th:action="@{/course/list}" method="get" class="row g-3 align-items-end">
+                    <div class="col-md-5">
+                        <label class="form-label small fw-bold">Trình độ (Level)</label>
+                        <select name="level" class="form-select border-0 shadow-sm">
+                            <option value="ALL" th:selected="${selectedLevel == 'ALL'}">Tất cả trình độ</option>
+                            <option value="Beginner" th:selected="${selectedLevel == 'Beginner'}">Beginner</option>
+                            <option value="Intermediate" th:selected="${selectedLevel == 'Intermediate'}">Intermediate</option>
+                            <option value="Advanced" th:selected="${selectedLevel == 'Advanced'}">Advanced</option>
+                        </select>
+                    </div>
+                    <div class="col-md-5">
+                        <label class="form-label small fw-bold">Học phí tối đa</label>
+                        <div class="input-group shadow-sm">
+                            <input type="number" name="maxFee" class="form-control border-0" th:value="${selectedMaxFee}">
+                            <span class="input-group-text bg-white border-0 text-muted">VNĐ</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary w-100 fw-bold">Lọc</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                <tr>
+                    <th>Mã</th>
+                    <th>Tên khóa học</th>
+                    <th>Giảng viên</th>
+                    <th class="text-end">Học phí</th>
+                    <th class="text-center">Thao tác</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="course : ${courses}">
+                    <td class="fw-bold text-primary" th:text="${course.id}"></td>
+                    <td th:text="${course.name}"></td>
+                    <td><span class="badge bg-info-subtle text-info border border-info px-3" th:text="${course.instructor}"></span></td>
+                    <td class="text-end fw-bold" th:text="${#numbers.formatDecimal(course.price, 0, 'POINT', 0, 'COMMA')} + ' VNĐ'"></td>
+                    <td class="text-center">
+                        <div class="btn-group gap-2">
+                            <a th:href="@{/course/detail/{id}(id=${course.id})}" class="btn btn-sm btn-outline-primary">Xem</a>
+                            <form th:action="@{/course/delete/{id}(id=${course.id})}" method="post" onsubmit="return confirm('Xóa khóa học?')">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Xóa</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<div th:replace="~{main-layout :: footer}"></div>
+</body>
+</html>
